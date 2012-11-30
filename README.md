@@ -34,4 +34,4 @@ $('datatest').sethtml5data('oldUrl',null);
 
 See it in action
 
-http://jsfiddle.net/y7w7E/
+http://jsfiddle.net/y7w7E/2/
