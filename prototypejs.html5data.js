@@ -24,7 +24,7 @@ else
 			{
 				if(datalabel != undefined)
 				{
-					eval("returnobject."+datalabel.camelize()+" = element.dataset."+datalabel);
+					returnobject[datalable.camelize()] = element.dataset[datalabel];
 				}
 				else
 				{
@@ -35,7 +35,7 @@ else
 			{
 				if(datalabel != undefined)
 				{
-					eval("returnobject."+datalabel.camelize()+" = '"+element.readAttribute("data-"+datalabel)+"'");
+					returnobject[datalabel.camelize()] = element.readAttribute("data-"+datalabel);
 				}
 				else
 				{
@@ -46,7 +46,7 @@ else
 						if(element.attributes[t].name.match(/^data-.+/))
 						{
 							label = element.attributes[t].name.replace(/^data-/,'').camelize();
-							eval("returnobject."+label+" = '"+element.attributes[t].value+"'");
+							returnobject[label] = element.attributes[t].value;
 						}
 					}
 				}
@@ -58,13 +58,13 @@ else
 			{
 				if(element._testnativedataset())
 				{
-					eval("element.dataset."+datalabel.camelize()+" = value;");
+					element.dataset[datalabel.camelize()] = value;
 				}
 				element.writeAttribute("data-"+datalabel.underscore().dasherize(),value);
 			}
 			else
 			{
-				eval("delete element.dataset."+datalabel.camelize()+";");
+				delete element.dataset[datalabel.camelize()];
 				element.writeAttribute("data-"+datalabel.underscore().dasherize(),null);
 			}
 		}
