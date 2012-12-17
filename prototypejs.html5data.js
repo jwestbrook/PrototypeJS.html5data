@@ -1,12 +1,10 @@
 /*
 http://github.com/jwestbrook/PrototypeJS.html5data
 */
-if(
-		(typeof Prototype=='undefined') ||
-		(typeof Element == 'undefined') ||
-		(typeof Element.Methods=='undefined')
-	)
+if((typeof Prototype =='undefined') || (typeof Element == 'undefined') || (typeof Element.Methods == 'undefined'))
+{
 	throw("this gethtml5data/sethtml5data method requires the Prototype JavaScript framework. http://prototypejs.org/download");
+}
 else
 {
 	Element.addMethods({
@@ -25,7 +23,7 @@ else
 			var returnobject = {};
 			if(element._testnativedataset())
 			{
-				if(datalabel != undefined)
+				if(datalabel !== undefined)
 				{
 					returnobject[datalable.camelize()] = element.dataset[datalabel];
 				}
@@ -36,7 +34,7 @@ else
 			}
 			else
 			{
-				if(datalabel != undefined)
+				if(datalabel !== undefined)
 				{
 					returnobject[datalabel.camelize()] = element.readAttribute("data-"+datalabel);
 				}
