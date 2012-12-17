@@ -1,9 +1,12 @@
+/*
+http://github.com/jwestbrook/PrototypeJS.html5data
+*/
 if(
 		(typeof Prototype=='undefined') ||
 		(typeof Element == 'undefined') ||
 		(typeof Element.Methods=='undefined')
 	)
-	throw("this html5data method requires the Prototype JavaScript framework");
+	throw("this gethtml5data/sethtml5data method requires the Prototype JavaScript framework. http://prototypejs.org/download");
 else
 {
 	Element.addMethods({
