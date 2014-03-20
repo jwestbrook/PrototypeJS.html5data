@@ -25,7 +25,7 @@ else
 			{
 				if(datalabel !== undefined)
 				{
-					returnobject[datalable.camelize()] = element.dataset[datalabel];
+					returnobject[datalabel.camelize()] = element.dataset[datalabel];
 				}
 				else
 				{
