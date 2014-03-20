@@ -32,16 +32,18 @@ can be easily accessed
 
 //Get the data-order-number value
 $( "datatest" ).data( "orderNumber" );
+Element.data( $( "datatest" ), "orderNumber" );
 
 $( "datatest" ).data( "firstName" );
-
+Element.data( $( "datatest" ), "firstName" );
 
 //Set the data-new-url value
 $( "datatest" ).data( "newUrl", "http://github.com" );
-
+Element.data( $( "datatest" ), "newUrl", "http://github.com" );
 
 //Delete an existing data-old-url value
 $('datatest').data( 'oldUrl', null );
+Element.data( $( "datatest" ), "oldUrl", null );
 
 
 ```
