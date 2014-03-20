@@ -1,73 +1,67 @@
-/*
-http://github.com/jwestbrook/PrototypeJS.html5data
-*/
-if((typeof Prototype =='undefined') || (typeof Element == 'undefined') || (typeof Element.Methods == 'undefined'))
-{
-	throw("this gethtml5data/sethtml5data method requires the Prototype JavaScript framework. http://prototypejs.org/download");
-}
-else
-{
-	Element.addMethods({
-		_testnativedataset: function(){
-			var testelement = new Element("input",{"data-test-this-thing":"test"});
-			if(typeof testelement.dataset != 'undefined' && typeof testelement.dataset.testThisThing != 'undefined')
-			{
-				return true;
+;(function(){
+
+	function getData( element, datalabel ){
+		var returnobject = {};
+		if( isDataSetSupported ){
+			if( datalabel !== undefined ){
+				returnobject[ datalabel.camelize() ] = element.dataset[ datalabel ];
+			} else {
+				returnobject = element.dataset;
 			}
-			else
-			{
-				return false;
-			}
-		},
-		gethtml5data: function(element,datalabel){
-			var returnobject = {};
-			if(element._testnativedataset())
-			{
-				if(datalabel !== undefined)
-				{
-					returnobject[datalabel.camelize()] = element.dataset[datalabel];
-				}
-				else
-				{
-					returnobject = element.dataset;
-				}
-			}
-			else
-			{
-				if(datalabel !== undefined)
-				{
-					returnobject[datalabel.camelize()] = element.readAttribute("data-"+datalabel);
-				}
-				else
-				{
-					var label = "";
-					var numberattributes = element.attributes.length;
-					for(var t = 0; t < numberattributes ; t++)
-					{
-						if(element.attributes[t].name.match(/^data-.+/))
-						{
-							label = element.attributes[t].name.replace(/^data-/,'').camelize();
-							returnobject[label] = element.attributes[t].value;
-						}
+		} else {
+			if( datalabel !== undefined ){
+				returnobject[ datalabel.camelize() ] = element.readAttribute( "data-" + datalabel );
+			} else {
+				var label = "",
+					numberattributes = element.attributes.length
+				;
+				
+				for( var t = 0; t < numberattributes ; t++ ){
+					if( element.attributes[ t ].name.match(/^data-.+/) ){
+						label = element.attributes[ t ].name.replace(/^data-/,'').camelize();
+						returnobject[ label ] = element.attributes[ t ].value;
 					}
 				}
 			}
-			return returnobject;
-		},
-		sethtml5data: function(element,datalabel,value){
-			if(typeof value != undefined)
-			{
-				if(element._testnativedataset())
-				{
-					element.dataset[datalabel.camelize()] = value;
-				}
-				element.writeAttribute("data-"+datalabel.underscore().dasherize(),value);
+		}
+		return returnobject;
+	}
+	
+	function setData( element, datalabel, value ){
+		if( typeof value !== undefined ){
+			
+			if( isDataSetSupported ){
+				element.dataset[ datalabel.camelize() ] = value;
 			}
-			else
-			{
-				delete element.dataset[datalabel.camelize()];
-				element.writeAttribute("data-"+datalabel.underscore().dasherize(),null);
+			
+			element.writeAttribute( "data-"+datalabel.underscore().dasherize(), value );
+		} else {
+			delete element.dataset[ datalabel.camelize() ];
+			element.writeAttribute( "data-"+datalabel.underscore().dasherize(), null );
+		}
+	}
+	
+	var isDataSetSupported = (function(){
+		var test = new Element( "input", { "data-test-dummy" : "test" } );
+			
+		if( typeof test.dataset !== 'undefined' && typeof test.dataset.testDummy !== 'undefined' ){
+			return true;
+		} 
+			
+		return false;		
+	})();
+	
+	Element.addMethods({
+		data: function(){
+			var args = arguments;
+			switch ( args.length ){
+				case 3:
+					setData.apply( this, args );
+					break;
+				default:
+					return getData.apply( this, args );
 			}
 		}
 	});
-}​
+	
+})();

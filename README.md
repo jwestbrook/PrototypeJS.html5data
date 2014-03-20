@@ -31,23 +31,19 @@ can be easily accessed
 ```javascript
 
 //Get the data-order-number value
-$('datatest').gethtml5data().orderNumber;
+$( "datatest" ).data( "orderNumber" );
+Element.data( $( "datatest" ), "orderNumber" );
 
-$('datatest').gethtml5data().firstName;
-
+$( "datatest" ).data( "firstName" );
+Element.data( $( "datatest" ), "firstName" );
 
 //Set the data-new-url value
-$('datatest').sethtml5data('newUrl','http://github.com');
-
+$( "datatest" ).data( "newUrl", "http://github.com" );
+Element.data( $( "datatest" ), "newUrl", "http://github.com" );
 
 //Delete an existing data-old-url value
-$('datatest').sethtml5data('oldUrl',null);
+$('datatest').data( 'oldUrl', null );
+Element.data( $( "datatest" ), "oldUrl", null );
 
 
 ```
-
-
-
-__See it in action__
-
-http://jsfiddle.net/jwestbrook/4XQzU/
